@@ -1,19 +1,27 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { updateTask } from '../store/actions/updateTask';
+import { getTaskById } from '../store/actions/getTaskById';
+import { endUpdating } from '../store/actions/endUpdating';
 
 //
 class UpdateTask extends React.Component {
 
-    state = {
-        input: ''
+    constructor(props) {
+        super(props);
+        this.state = {
+            input: ''
+        }
+        this.textInput = React.createRef();
     }
 
     componentDidMount() {
         this.setState({
-            input: this.props.location.state
-        })
+            input: this.props.updateTask
+        });
+        this.textInput.current.focus();
     }
+
 
     // update state as input is entered
     handleChange = (event) => {
@@ -23,20 +31,25 @@ class UpdateTask extends React.Component {
     // adds task updating the redux gobal state 
     handleSubmit = (event) => {
         event.preventDefault();
+        this.props.endUpdate();
         // add new task to db
-        this.props.update(this.props.match.params.task_id, this.state.input);
-        // go back to tasks
-        this.props.history.push('/')
+        this.props.update(this.props.updateId, this.state.input);
     }
 
     render() {
-       
+        //console.log('test', this.props.updateId, this.props.updateTask)
         return (
             <div className="row">
                 <h4 className='center-align'>Update Task</h4>
                 <form onSubmit={this.handleSubmit}>
                     <div className="col l10 m10">
-                        <input id="inputID" type="text" value={this.state.input} onChange={this.handleChange} ></input>
+                        <input
+                            id="inputID" 
+                            type="text" 
+                            value={this.state.input} 
+                            onChange={this.handleChange} 
+                            ref={this.textInput} >   
+                        </input>
                     </div>
                     <div className="col l2 m2">
                         <button type="submit" className="btn grey accent-4 add-button"><b>Update</b></button>
@@ -48,15 +61,28 @@ class UpdateTask extends React.Component {
 }
 
 
+const mapStateToProps = (state) => {
+    return {
+        updateId: state.updateId,
+        updateTask: state.updateTask
+    }
+}
+
 
 //
 const mapDispatchToProps = (dispatch) => {
     return {
         update: (task_id, task) => {
             dispatch(updateTask(task_id, task));
+        },
+        getTask: (task_id) => {
+            dispatch(getTaskById(task_id));
+        },
+        endUpdate: () => {
+            dispatch(endUpdating(false))
         }
     }
 }
 
 
-export default connect(null, mapDispatchToProps)(UpdateTask);
+export default connect(mapStateToProps, mapDispatchToProps)(UpdateTask);

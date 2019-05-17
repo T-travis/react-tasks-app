@@ -1,7 +1,10 @@
 
 
 const initState = {
-    tasks: []
+    tasks: [],
+    updating: false,
+    updateId: '',
+    updateTask: ''
 }
 
 const rootReducer = (state = initState, action) => {
@@ -13,6 +16,26 @@ const rootReducer = (state = initState, action) => {
         return {
             ...state,
             tasks: newTasks
+        }
+    } else if(action.type === 'EDIT_TASK') {
+        //console.log(action.task_id);
+        return {
+            ...state,
+            updating: action.update,
+            updateId: action.task_id,
+            updateTask: action.task
+        }
+    } else if(action.type === 'UPDATE_TASK') {
+        //console.log('reducer', action.task)
+        return {
+            ...state,
+            updateTask: action.task
+        }
+    } else if(action.type === 'END_UPDATING') {
+        //console.log(action.stop)
+        return {
+            ...state,
+            updating: action.stop
         }
     } else {
         return state;

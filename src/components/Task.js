@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from 'react-redux';
 import { deleteTask } from '../store/actions/deleteTask';
+import { editTask } from '../store/actions/editTask';
 
 // This component represents a individual tast object
 class Tasks extends React.Component {
@@ -16,8 +17,7 @@ class Tasks extends React.Component {
 
     // edit task
     handleClickEdit = (task_id, task) => {
-        //console.log(task_id, task);
-        this.props.props.history.push({ pathname: `update-task/${task_id}`, state: task });
+        this.props.edit(task_id, task);
     }
 
 
@@ -25,7 +25,7 @@ class Tasks extends React.Component {
         return (
             <div className="task">
                 <div className="row">
-                    <div className='card-panel' >
+                    <div className="card-panel" >
                         <p>{this.props.task.task}
                             <i
                                onClick={() => { this.handleClickDelete(this.props.task.task_id) } }
@@ -45,12 +45,22 @@ class Tasks extends React.Component {
         }
 }
 
+const mapStateToProps = (state) => {
+    return {
+        updating: state.updating
+    }
+}
+
 const mapDispatchToProps = (dispatch) => {
     return {
         delete: (task_id) => {
             dispatch(deleteTask(task_id));
+        },
+        edit: (task_id, task) => {  
+            // true sets the update status to true
+            dispatch(editTask(task_id, task, true));
         }
     }
 }
 
-export default connect(null, mapDispatchToProps)(Tasks);
+export default connect(mapStateToProps, mapDispatchToProps)(Tasks);

@@ -3,6 +3,7 @@ import Task from './Task';
 import AddTask from './AddTask';
 import { connect } from 'react-redux';
 import { getAllTasks } from "../store/actions/getAllTasks";
+import UpdateTask from "./UpdateTask";
 
 
 // This component loads all tasks via api call
@@ -21,7 +22,7 @@ class Tasks extends React.Component {
   tasksList = (tasks) => {
     const list = tasks.map(task => {
       // must pass props here so we can access 'history' in each task 
-      return <Task props={this.props} task={task} key={task['task_id']} />;
+      return <Task task={task} key={task.task_id} />;
     })
     return list;
   }
@@ -37,7 +38,9 @@ class Tasks extends React.Component {
     }
     return (
       <div className="">
-        <AddTask />
+        {
+          this.props.updating ? (<UpdateTask />) : (<AddTask />)
+        }
         {list}
       </div>
     );
@@ -48,7 +51,8 @@ class Tasks extends React.Component {
 const mapStateToProps = (state) => {
   // object we want to map to props of this component
   return {
-    tasks: state.tasks
+    tasks: state.tasks,
+    updating: state.updating
   }
 }
 

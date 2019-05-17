@@ -3,7 +3,7 @@ import axios from 'axios';
 export const updateTask = (task_id, task) => {
     return async (dispatch) => {
         try {
-            const URL = '*****************************';
+            const URL = 'https://api.travistackett.net/v1/tasks';
             // update task
             await axios.put( (URL + '/' + task_id), { task: task});
             // get all call to db
