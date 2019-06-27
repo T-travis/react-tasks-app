@@ -4,7 +4,7 @@ export const addNewTask = (task) => {
     return async (dispatch) => {
         // make async db calls
         try {
-            const URL = 'https://api.travistackett.net/v1/tasks';
+            const URL = '**********************';
             // add new task
             await axios.post(URL, { task: task });
             // get updated tasks

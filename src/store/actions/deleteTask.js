@@ -5,7 +5,7 @@ export const deleteTask = (task_id) => {
     return async (dispatch) => {
         // delete db call 
         try {
-            const URL = 'https://api.travistackett.net/v1/tasks';
+            const URL = '*************************';
             // detele from db
             await axios.delete(URL + '/' + task_id);
             // get all call to db
