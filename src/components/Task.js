@@ -1,23 +1,17 @@
 import React from "react";
-import { connect } from "react-redux";
-import { deleteTask } from "../store/actions/deleteTask";
 
 // This component represents a individual tast object
 class Tasks extends React.Component {
 
 	// delete task
 	handleClickDelete = task_id => {
-		//console.log(task_id);
-		if (window.confirm("Are you sure you want to delete this task?")) {
-			// delete task
-			this.props.delete(task_id);
-		}
+		this.props.deleteTask(task_id);
 	};
 
 	// edit task
 	handleClickEdit = (task_id, task) => {
-        // card is grey when editing
-        this.divRef.setAttribute("class", "card-panel grey");
+    // card is grey when editing
+    this.divRef.setAttribute("class", "card-panel grey");
 		this.props.updateTriggered(this.divRef, task_id, task);
 	};
 
@@ -57,16 +51,4 @@ class Tasks extends React.Component {
 	}
 }
 
-
-const mapDispatchToProps = dispatch => {
-	return {
-		delete: task_id => {
-			dispatch(deleteTask(task_id));
-		}
-	};
-};
-
-export default connect(
-	null,
-	mapDispatchToProps
-)(Tasks);
+export default Tasks;

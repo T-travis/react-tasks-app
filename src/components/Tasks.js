@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { getAllTasks } from "../store/actions/getAllTasks";
 import { updateTask } from '../store/actions/updateTask';
 import { addNewTask } from "../store/actions/addNewTask";
+import { deleteTask } from "../store/actions/deleteTask";
 
 // This component loads all tasks via api call
 class Tasks extends React.Component {
@@ -20,11 +21,13 @@ class Tasks extends React.Component {
 		this.props.getTasks();
 	}
 
+	// create list of Tasks
 	tasksList = tasks => {
 		const list = tasks.map(task => {
 			// must pass props here so we can access 'history' in each task
 			return (
 				<Task
+					deleteTask={this.deleteTask}
           updateTriggered={this.updateTriggered}
 					task={task}
 					key={task.task_id}
@@ -39,6 +42,7 @@ class Tasks extends React.Component {
     // add new task to db
     this.props.addTask(this.state.task);
     this.setState({
+			updating: false,
       task: '',
       task_id: ''
     })
@@ -72,6 +76,24 @@ class Tasks extends React.Component {
 			task: task
 		});
 	};
+
+	deleteTask = (task_id) => {
+		// if update was selected and then delete the card needs to be white
+		if(this.state.divRef) {
+			// card is white when not updating
+			this.state.divRef.setAttribute("class", "card-panel");
+		}
+		// reset input
+		this.setState({ 
+			task: '',
+			updating: false
+		})
+		//console.log(task_id);
+		if (window.confirm("Are you sure you want to delete this task?")) {
+			// delete task
+			this.props.delete(task_id);
+		}
+	}
 
 	render() {
 		let list;
@@ -140,6 +162,9 @@ const mapStateToProps = state => {
 // dispatch is a redux method to allow state change using redux
 const mapDispatchToProps = dispatch => {
 	return {
+		delete: task_id => {
+			dispatch(deleteTask(task_id));
+		},
     addTask: task => {
       dispatch(addNewTask(task));
     },
