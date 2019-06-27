@@ -8,14 +8,19 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-.App {
-}
-
 .header-title {
   color: white;
   min-width: 100%;
   margin: 0;
   padding: 1rem;
+}
+
+.delete-icon {
+  margin-left: 1em;
+}
+
+.update-icon {
+  margin-right: 1em;
 }
 
 .delete-icon-color {
@@ -59,9 +64,44 @@ form button {
   margin-top: .3rem;
 }
 
+.list {
+  margin-left: 1rem !important;
+  margin-right: 1rem !important;
+}
+
+/** change widths for mobile **/
+@media only screen and (max-width: 600px) {
+	.main-container {
+		min-width: 100% !important;
+	}
+
+	.header .row {
+		min-width: 100% !important;
+	}
+
+	.header {
+		max-height: 4rem !important;
+	}
+
+	.header .header-title {
+		font-size: 1.6rem !important;
+	}
+
+}
+
 
 /* override materialize here */
 .task .card-panel {
   padding: 0.1rem 1rem 0.1rem 1rem;
   margin: 0;
+}
+
+blockquote {
+    border-left-color: #263238 !important;
+}
+
+blockquote a {
+	font-weight: bold !important;
+	margin-left: .6em !important;
+	color: #2962ff !important;
 }

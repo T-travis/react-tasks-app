@@ -6,7 +6,7 @@ import "materialize-css/dist/css/materialize.min.css";
 
 function App() {
   return (
-    <div className="App container">
+    <div className="main-container container">
       <Header />
       <Tasks />
     </div>

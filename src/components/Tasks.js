@@ -110,7 +110,7 @@ class Tasks extends React.Component {
 			<div>
 				<div className="row">
 					<form>
-            <div className="col l11 m11">
+            <div className="col l11 m11 s12">
 							<input
                 id="input-style"
                 type="text"
@@ -119,7 +119,7 @@ class Tasks extends React.Component {
 								onChange={this.handleInputChange}
 							/>
 						</div>
-						<div className="col l1 m1">
+						<div className="col l1 m1 s12 center">
               {/* when updating show update button */}
 							{this.state.updating ? (
 								<div className="col l2 m2">
@@ -143,8 +143,8 @@ class Tasks extends React.Component {
 						</div>
 					</form>
 				</div>
-
-				{list}
+								
+				<div className="row"><div className="col l12 m12  list">{list}</div></div>
 			</div>
 		);
 	}
