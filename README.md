@@ -4,9 +4,9 @@ using Node.js, AWS Lambda, API Gateway, and DynamoDB. It incorporates all CRUD (
 using the HTTP methods POST, GET, PUT, and DELETE. 
 
 # Contents
-* [Demo Image](https://github.com/T-travis/tasks-app/blob/master/README.md#demo-image)
-* [Architecture and Api Design](https://github.com/T-travis/tasks-app/blob/master/README.md#architecture-and-api-design)
-* [Built With](https://github.com/T-travis/tasks-app/blob/master/README.md#built-with)
+* [Demo Image](https://github.com/T-travis/react-tasks-app#demo-image)
+* [Architecture and Api Design](https://github.com/T-travis/react-tasks-app#architecture-and-api-design)
+* [Built With](https://github.com/T-travis/react-tasks-app#built-with)
 
 
 # Demo Image
