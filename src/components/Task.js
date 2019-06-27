@@ -19,7 +19,7 @@ class Tasks extends React.Component {
 		return (
 			<div className="task">
 				<div className="row">
-                    <div className="card-panel" ref={div => this.divRef = div }>
+          <div className="card-panel" ref={div => this.divRef = div }>
 						<p>
 							{this.props.task.task}
 							<i
@@ -28,7 +28,7 @@ class Tasks extends React.Component {
 										this.props.task.task_id
 									);
 								}}
-								className="right material-icons delete-icon-color"
+								className="right material-icons delete-icon-color delete-icon"
 							>
 								delete
 							</i>
@@ -39,7 +39,7 @@ class Tasks extends React.Component {
 										this.props.task.task
 									);
 								}}
-								className="right material-icons edit-icon-color"
+								className="left material-icons edit-icon-color update-icon"
 							>
 								create
 							</i>
